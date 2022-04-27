@@ -5,5 +5,5 @@ build:
 
 run:
 	make build
-	bochs
+	echo "continue" | bochs
 

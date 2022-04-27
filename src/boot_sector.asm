@@ -2,28 +2,32 @@
 
 mov ah, 0x0e  ; int 10/ah = 0eh - > scrolling teletype BIOS routine.
 
-mov al, 'H'
+mov bp, 0x8000   ; Set the stack base a little bit above the boot sector (so it doesn't overwrite)
+mov sp, bp
+
+push 'A'
+push 'B'
+push 'C'
+
+pop bx
+mov al, bl
 int 0x10
-mov al, 'e'
+
+pop bx
+mov al, bl
 int 0x10
-mov al, 'l'
+
+mov al, [0x7ffe]
 int 0x10
-mov al, 'l'
+
+mov bx, my_string
+mov al, [bx]
 int 0x10
-mov al, 'o'
-int 0x10
-mov al, ' '
-int 0x10
-mov al, 'W'
-int 0x10
-mov al, 'o'
-int 0x10
-mov al, 'r'
-int 0x10
-mov al, 'l'
-int 0x10
-mov al, 'd'
-int 0x10
+
+
+my_string:
+    db 'Hello World',0       ; Define a null-terminated string.
+
 
 jmp $        ;Jump to the current address forever.
 
