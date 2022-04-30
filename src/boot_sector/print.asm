@@ -28,6 +28,6 @@ print_char: ; Function to print the character in al
     pusha         ; Push all registers to the stack
     mov ah, 0x0e  ; Set the interrupt for BIOS tele-type
     int 0x10      ; Call the interrupt to print
-    popa          ; Return all registers to their original statement
+    popa          ; Return all registers to their original state
     ret           ; Jump back to the call statement
 
