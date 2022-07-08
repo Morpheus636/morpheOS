@@ -12,6 +12,7 @@ hello_msg: db 'Why would you do this to yourself?',0
 
 ; Imports
 %include "src/boot_sector/print.asm"
+%include "src/boot_sector/disk.asm"
 
 
 ; Padding and BIOS Magic Number
