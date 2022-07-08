@@ -20,34 +20,33 @@ print_str: ; Function to print a null-terminated string held in a memory address
         ret           ; Jump back to the call statement
 
 
-; FIXME - prints wrong character after first letter.
+
 print_hex: ; Function to print a hex value from DX as a string (not a character)
-    HEX_OUT: db '0x0000',0
     ; Credit to kthompson on GitHub for parts of this function.
     pusha  ; Push all registers to the stack
-    mov cx, 4 ; Start the counter at 4 so we can decrement it
 
+    mov cx, 4 ; Start the counter for the loop at 4 (4 digits in a hex string)
     print_hex_iterate:
-        dec cx          ; decrement the counter
+        dec cx          ; decrement the counter for the loop
+        
         mov ax, dx      ; copy dx to ax so we can mask it for the last chars
-        shr dx, 4       ; shift dx 4 bytes to the right
+        shr dx, 4       ; shift dx 4 bits to the right
         and ax, 0xf     ; mask ah to get the last 4 bits
 
         mov bx, HEX_OUT ; set bx to the mem address of the output string
         add bx, 2       ; skip the 0x at the beginning
         add bx, cx      ; add the current counter (CX) to the address
 
-        cmp ax,0xa      ; check if it's a letter or a number
-            jl set_letter   ; if it's a number, set the value
-        add al, 0x23    ; for ASCII letter, add 0x31 (and 0x30 for numbers) to value
-            jl set_letter   ; then set the value
+        cmp ax,0xa      ; check if ax has a letter or a number
+        jl set_letter   ; if it's a number, set the value
+        add byte [bx],7 ; for ASCII letter, add 7
+        jl set_letter   ; then set the value
         
     set_letter:
-        add al, 0x30    ; For ASCII number, add 0x30 to value.
-        mov byte [bx], al
+        add byte [bx], al   ; Add the value of the byte to the char at bx
 
-        cmp cx, 0       ; If counter is done, return
-            je print_hex_end
+        cmp cx, 0
+        je print_hex_end       ; If the counter is done, return.
         jmp print_hex_iterate  ; Else, loop again
 
     print_hex_end:
@@ -55,6 +54,9 @@ print_hex: ; Function to print a hex value from DX as a string (not a character)
         call print_str  ; Print the output
         popa   ; Return all registers to their original state
         ret    ; Jump back to the call statement
+
+    ;Variable Definitions
+    HEX_OUT: db '0x0000',0
 
 
 
@@ -64,4 +66,3 @@ print_char: ; Function to print the character in al
     int 0x10      ; Call the interrupt to print
     popa          ; Return all registers to their original state
     ret           ; Jump back to the call statement
-

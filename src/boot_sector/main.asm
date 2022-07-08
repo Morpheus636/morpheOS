@@ -4,6 +4,8 @@ mov bp, 0x8000  ; Set the base memory location for the stack
 mov bx, hello_msg           ; Set al to the address of hello_msg
 call print_str              ; Run the print function
 
+mov dx, 0x1fb7
+call print_hex
 
 jmp $        ;Jump to the current address forever.
 
@@ -13,6 +15,7 @@ hello_msg: db 'Hello World',0
 
 ; Imports
 %include "src/boot_sector/print.asm"
+
 
 ; Padding and BIOS Magic Number
 ; DO NOT TOUCH
