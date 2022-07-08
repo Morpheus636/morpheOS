@@ -31,7 +31,7 @@ print_hex: ; Function to print a hex value from DX as a string (not a character)
         
         mov ax, dx      ; copy dx to ax so we can mask it for the last chars
         shr dx, 4       ; shift dx 4 bits to the right
-        and ax, 0xf     ; mask ah to get the last 4 bits
+        and ax, 0xf     ; mask ax to get the last 4 bits
 
         mov bx, HEX_OUT ; set bx to the mem address of the output string
         add bx, 2       ; skip the 0x at the beginning
