@@ -1,10 +1,6 @@
 [bits 16]
 [org 0x0600]
 
-constants:
-    %define NEW_OFFSET 0x0600
-    %define OLD_OFFSET 0x7c00
-
 
 pre_copy:
     ; Disable Interrupts
