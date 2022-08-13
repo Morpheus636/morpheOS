@@ -1,5 +1,3 @@
-# Tell bochs to use our boot sector code as though it were
-# a floppy disk inserted into a computer at boot time .
-floppya : 1 _44 = bin/boot_sector.bin , status = inserted
-boot : a
+floppya: 1_44=dist/morpheOS.img, status=inserted
+boot : floppy
 

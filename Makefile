@@ -25,14 +25,6 @@ image:
 	rm -f ./dist/morpheOS.img
 	# Assemble and compile all OS components.
 	make boot_sector
-	# Create empty disk image.
-	# NOTE: count arg determines size of image (multiple of 512 bytes)
-	dd if=/dev/zero of=/dist/morpheOS.img bs=512 count=1
-	# Add binaries to disk image.
-	cat ./dist/bin/boot_sector.bin >> ./dist/morpheOS.img
-
-# Build the disk image and use bochs to boot it. 
-run:
-	make image
-	echo "continue" | bochs
+	# Create disk image from binaries.
+	cat ./dist/bin/boot_sector.bin > ./dist/morpheOS.img
 
