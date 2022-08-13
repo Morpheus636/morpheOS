@@ -1,3 +1,0 @@
-floppya: 1_44=dist/morpheOS.img, status=inserted
-boot : floppy
-
