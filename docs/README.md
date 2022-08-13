@@ -13,8 +13,7 @@ learning low-level programming.
 MorpheOS is unstable and really doesn't do anything right now. If you really want
 to give it a shot in an emulator, here are the instructions.
 1. Install the following development requirements
-    - `bochs`
-    - `bochs-x`
+    - `qemu-system-x86_64`
     - `nasm`
     - `make`
 2. Run `make run`
