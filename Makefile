@@ -1,18 +1,38 @@
-boot_loader:
-	mkdir -p ./bin
-	rm -f ./bin/*
-	nasm ./src/boot_sector/main.asm -f bin -o ./bin/boot_sector.bin
+# Assemble the boot sector
+boot_sector:
+	# Ensure ./dist/bin exists.
+	mkdir -p ./dist/bin
+	# Cleanup old boot sector builds.
+	rm -f ./dist/bin/boot_sector.bin
+	# Assemble the boot sector.
+	nasm ./src/boot_sector/main.asm -f bin -o ./dist/bin/boot_sector.bin
 
+# Compile the kernel.
 kernel:
-	echo ""
+	# Ensure ./dist/bin exists.
+	mkdir -p ./dist/bin
+	# Cleanup old kernel builds.
+	rm -f ./dist/bin/kernel.bin
+	# Compile the kernel.
+	echo "Not Implemented Yet"
+	exit 1
 
-shell:
-	echo ""
+# Build the bootable disk image, including assembling and compiling the other OS components.
+image:
+	# Ensure ./dist exists.
+	mkdir -p ./dist
+	# Cleanup old disk image builds.
+	rm -f ./dist/morpheOS.img
+	# Assemble and compile all OS components.
+	make boot_sector
+	# Create empty disk image.
+	# NOTE: count arg determines size of image (multiple of 512 bytes)
+	dd if=/dev/zero of=/dist/morpheOS.img bs=512 count=1
+	# Add binaries to disk image.
+	cat ./dist/bin/boot_sector.bin >> ./dist/morpheOS.img
 
-build:
-	make boot_loader
-
+# Build the disk image and use bochs to boot it. 
 run:
-	make build
+	make image
 	echo "continue" | bochs
 
