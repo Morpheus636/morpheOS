@@ -28,3 +28,11 @@ image:
 	# Create disk image from binaries.
 	cat ./dist/bin/boot_sector.bin > ./dist/morpheOS.img
 
+# Build the image and run it with qemu.
+run:
+	# Build the image.
+	make image
+	# Run the image.
+	qemu-system-x86_64 \
+			-drive file=./dist/morpheOS.img,format=raw,index=0,media=disk \
+			-d cpu_reset
