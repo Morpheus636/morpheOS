@@ -1,3 +1,4 @@
+[bits 16]
 print_str:
     ; Function to print a null-terminated string held in the memory location stored at bx
     ; Args:
@@ -31,7 +32,7 @@ print_str:
         ret
 
 
-
+[bits 16]
 print_hex:
     ; Function to print a hex value from DX as a string (not a character)
     ; Credit to kthompson on GitHub for parts of this function.
@@ -81,7 +82,7 @@ print_hex:
     HEX_OUT: db '0x0000',0
 
 
-
+[bits 16]
 print_char:
     ; Function to print a single character from al
     ; Args: 
