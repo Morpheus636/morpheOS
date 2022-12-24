@@ -7,12 +7,17 @@ mov [BOOT_DRIVE], dl
 mov bp, 0x8000
 mov sp, bp
 
+; Load the second stage boot sector
 mov bx, 0x9000       ; Arg for load sectors - Mem Destination
 mov dh, 10           ; Arg for load_sectors - Load 10 sectors
 mov dl, [BOOT_DRIVE] ; Arg for load_sectros - Load from the boot drive.
-call load_sectors    ; Load the sectors to the disk.
+call load_sectors
+
+; Jump to the second stage bootloader
+jmp 0x9000 + 512
 
 jmp $
+
 ; Variables
 BOOT_DRIVE: db 0
 
