@@ -3,7 +3,7 @@ A simple operating system developed by Morpheus636 for the purpose of
 learning low-level programming.
 
 ## Features
-- TODO
+- Doesn't do anything right now
 
 ## Technologies
 - x86 Assembly

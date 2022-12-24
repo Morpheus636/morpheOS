@@ -7,6 +7,14 @@ boot_sector:
 	# Assemble the boot sector.
 	nasm ./src/boot_sector/main.asm -f bin -o ./dist/bin/boot_sector.bin
 
+boot_loader:
+	# Ensure ./dist/bin exists
+	mkdir -p ./dist/bin
+	# Cleanup old boot loader builds.
+	rm -f ./dist/bin/boot_sector.bin
+	# Assemble the boot loader.
+	nasm ./src/boot_loader/main.asm -f bin -o ./dist/bin/boot_loader.bin
+
 # Compile the kernel.
 kernel:
 	# Ensure ./dist/bin exists.
@@ -25,8 +33,10 @@ image:
 	rm -f ./dist/morpheOS.img
 	# Assemble and compile all OS components.
 	make boot_sector
+	#make boot_loader
 	# Create disk image from binaries.
 	cat ./dist/bin/boot_sector.bin > ./dist/morpheOS.img
+	cat ./dist/bin/boot_loader.bin >> ./dist/morpheOS.img
 
 # Build the image and run it with qemu.
 run:
