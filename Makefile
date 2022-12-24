@@ -1,47 +1,46 @@
 # Assemble the boot sector
-boot_sector:
+dist/bin/boot_sector.bin:
 	# Ensure ./dist/bin exists.
 	mkdir -p ./dist/bin
-	# Cleanup old boot sector builds.
-	rm -f ./dist/bin/boot_sector.bin
 	# Assemble the boot sector.
 	nasm ./src/boot_sector/main.asm -f bin -o ./dist/bin/boot_sector.bin
 
-boot_loader:
+dist/bin/boot_loader.bin:
 	# Ensure ./dist/bin exists
 	mkdir -p ./dist/bin
-	# Cleanup old boot loader builds.
-	rm -f ./dist/bin/boot_sector.bin
 	# Assemble the boot loader.
 	nasm ./src/boot_loader/main.asm -f bin -o ./dist/bin/boot_loader.bin
 
-# Compile the kernel.
-kernel:
-	# Ensure ./dist/bin exists.
-	mkdir -p ./dist/bin
-	# Cleanup old kernel builds.
-	rm -f ./dist/bin/kernel.bin
-	# Compile the kernel.
-	echo "Not Implemented Yet"
-	exit 1
-
 # Build the bootable disk image, including assembling and compiling the other OS components.
-image:
+dist/morpheOS.img:
 	# Ensure ./dist exists.
 	mkdir -p ./dist
-	# Cleanup old disk image builds.
-	rm -f ./dist/morpheOS.img
 	# Assemble and compile all OS components.
-	make boot_sector
-	#make boot_loader
+	make dist/bin/boot_sector.bin
+	make dist/bin/boot_loader.bin
 	# Create disk image from binaries.
 	cat ./dist/bin/boot_sector.bin > ./dist/morpheOS.img
 	cat ./dist/bin/boot_loader.bin >> ./dist/morpheOS.img
 
+# Compile the kernel.
+.PHONY: kernel
+kernel:
+	# Ensure ./dist/bin exists.
+	mkdir -p ./dist/bin
+	# Compile the kernel.
+	echo "Not Implemented Yet"
+	exit 1
+
+.PHONY: clean
+clean:
+	rm -rf dist/
+	
 # Build the image and run it with qemu.
+.PHONY: run
 run:
+	make clean
 	# Build the image.
-	make image
+	make dist/morpheOS.img
 	# Run the image.
 	qemu-system-x86_64 \
 			-drive file=./dist/morpheOS.img,format=raw,index=0,media=disk \
