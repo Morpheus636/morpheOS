@@ -7,13 +7,13 @@ mov [BOOT_DRIVE], dl
 mov bp, 0x8000
 mov sp, bp
 
-; Load the second stage boot sector
+; Load the second stage boot sector to the end of 16-bit addressable memory.
 mov bx, 0xffff - 5120  ; Arg for load sectors - Mem Destination
 mov dh, 10             ; Arg for load_sectors - Load 10 sectors
 mov dl, [BOOT_DRIVE]   ; Arg for load_sectros - Load from the boot drive.
 call load_sectors
 
-; Jump to the second stage bootloader
+; Jump to the second stage bootloader.
 jmp 0xffff - 5120 + 512
 
 ; Variables
