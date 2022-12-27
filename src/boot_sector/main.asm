@@ -16,8 +16,6 @@ call load_sectors
 ; Jump to the second stage bootloader
 jmp 0x9000 + 512
 
-jmp $
-
 ; Variables
 BOOT_DRIVE: db 0
 

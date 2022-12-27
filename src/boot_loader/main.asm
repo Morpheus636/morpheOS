@@ -1,6 +1,4 @@
 [bits 16]
-jmp $                ; FIXME - This is only here for testing purposes.
-
 cli                    ; Disable interrupts before activating PM
 lgdt [gdt_descriptor]  ; Load the GDT
 

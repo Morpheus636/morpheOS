@@ -60,7 +60,7 @@ gdt_data:            ; GDT Data Segment Descriptor.
 gdt_end:             ; End of the GDT
 
 
-gdt_decriptor:        ; GDT Descriptor
+gdt_descriptor:        ; GDT Descriptor
     dw gdt_end - gdt_start - 1 ; The size of the GDT. Always one less.
     dd gdt_start     ; The start address for the gdt.
 
