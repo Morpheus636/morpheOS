@@ -9,7 +9,7 @@ gdt_null:            ; Mandatory Null Descriptor
 
 gdt_code:            ; GDT Code Segment Descriptor
     ; Base: 0x0
-    ; Limit: 0xffff
+    ; Limit: 0xfffff
     ; First Flags: (1001b)
     ;   - present: 1
     ;   - privellage: 00
@@ -25,7 +25,7 @@ gdt_code:            ; GDT Code Segment Descriptor
     ;   - 64-bit segment: 0
     ;   - AVL: 0
 
-    dw 0xffff        ; Limit
+    dw 0xfffff        ; Limit
     dw 0x0           ; Base
     dw 0x0           ; Base
     db 10011010b     ; First Flags | Type Flags
@@ -35,7 +35,7 @@ gdt_code:            ; GDT Code Segment Descriptor
 gdt_data:            ; GDT Data Segment Descriptor.
     ; Identical to gdt_code except type flags.
     ; Base: 0x0
-    ; Limit: 0xffff
+    ; Limit: 0xfffff
     ; First Flags: (1001b)
     ;   - present: 1
     ;   - privellage: 00
@@ -50,7 +50,7 @@ gdt_data:            ; GDT Data Segment Descriptor.
     ;   - 32-bit default: 1
     ;   - 64-bit segment: 0
     ;   - AVL: 0
-    dw 0xffff        ; Limit
+    dw 0xfffff        ; Limit
     dw 0x0           ; Base
     dw 0x0           ; Base
     db 10011100b     ; First Flags | Type Flags
