@@ -1,6 +1,6 @@
 ; GDT - Global Descriptor Table
 ; Defines overlapping code and data segments required by 32-bit PM.
-
+; TODO - Determine and define segment layout
 gdt_start:
 
 gdt_null:            ; Mandatory Null Descriptor
@@ -53,7 +53,7 @@ gdt_data:            ; GDT Data Segment Descriptor.
     dw 0xfffff        ; Limit
     dw 0x0           ; Base
     dw 0x0           ; Base
-    db 10011100b     ; First Flags | Type Flags
+    db 10010010b     ; First Flags | Type Flags
     db 11001111b     ; Second Flags | Limit
     db 0x0           ; Base
 

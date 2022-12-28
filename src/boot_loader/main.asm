@@ -11,6 +11,8 @@ jmp CODE_SEG:pm_main   ; Far jump to PM code
 
 
 ; Imports
+; This section is only imports used in Real Mode.
+; Protected Mode imports are within pm_main.asm.
 %include "src/boot_loader/pm_main.asm"
 %include "src/boot_loader/gdt.asm"
 
