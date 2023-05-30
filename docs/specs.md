@@ -17,3 +17,4 @@ directory of the first partition and passes control to it.
 |  11-X  |      X      | Partitions                     |
 |________|_____________|________________________________|
 
+### Memory Layout - Boot Loader

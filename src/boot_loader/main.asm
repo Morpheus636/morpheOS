@@ -1,3 +1,4 @@
+[org 0xecff]
 [bits 16]
 cli                    ; Disable interrupts before activating PM
 lgdt [gdt_descriptor]  ; Load the GDT

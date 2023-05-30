@@ -18,11 +18,9 @@ jmp 0xffff - 5120 + 512
 
 ; Variables
 BOOT_DRIVE: db 0
-
 ; Imports.
 %include "src/boot_sector/print.asm"
 %include "src/boot_sector/disk.asm"
 
 ; This must be last.
 %include "src/boot_sector/partition_table.asm"
-

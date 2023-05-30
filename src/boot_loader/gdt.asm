@@ -1,3 +1,4 @@
+[bits 32]
 ; GDT - Global Descriptor Table
 ; Defines overlapping code and data segments required by 32-bit PM.
 ; TODO - Determine and define segment layout
