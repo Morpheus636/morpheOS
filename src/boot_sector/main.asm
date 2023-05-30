@@ -1,31 +1,26 @@
-[org 0x7c00] ; Tell the assembler to offset addresses of labels
-mov bp, 0x8000  ; Set the base memory location for the stack
+[bits 16]
+[org 0x7c00]
+;Remember the boot drive.
+mov [BOOT_DRIVE], dl
 
-; Print the hello messgae.
-mov bx, hello_msg
-call print_str
+; Set the stack for 16 Bit Real Mode
+mov bp, 0x8000
+mov sp, bp
 
-; Load the kernel
-; It should block until the kernel shuts down.
-call load_kernel
+; Load the second stage boot sector to the end of 16-bit addressable memory.
+mov bx, 0xffff - 5120  ; Arg for load sectors - Mem Destination
+mov dh, 10             ; Arg for load_sectors - Load 10 sectors
+mov dl, [BOOT_DRIVE]   ; Arg for load_sectros - Load from the boot drive.
+call load_sectors
 
+; Jump to the second stage bootloader.
+jmp 0xffff - 5120 + 512
 
-; Exit params
-mov bx, exit_msg
-call print_str
-jmp $
-
-
-; Variable Definitions
-hello_msg: db 'Why would you do this to yourself?',0
-exit_msg: db 'Exit',0
-
-; Imports
+; Variables
+BOOT_DRIVE: db 0
+; Imports.
 %include "src/boot_sector/print.asm"
-%include "src/boot_sector/boot_loader.asm"
-        
+%include "src/boot_sector/disk.asm"
 
-; DO NOT TOUCH
-; Pad out the boot sector with zeroes then addd the magic number
-times 510-($-$$) db 0
-dw 0xaa55
+; This must be last.
+%include "src/boot_sector/partition_table.asm"

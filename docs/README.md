@@ -3,7 +3,7 @@ A simple operating system developed by Morpheus636 for the purpose of
 learning low-level programming.
 
 ## Features
-- TODO
+- Doesn't do anything right now
 
 ## Technologies
 - x86 Assembly
@@ -13,8 +13,7 @@ learning low-level programming.
 MorpheOS is unstable and really doesn't do anything right now. If you really want
 to give it a shot in an emulator, here are the instructions.
 1. Install the following development requirements
-    - `bochs`
-    - `bochs-x`
+    - `qemu-system-x86_64`
     - `nasm`
     - `make`
 2. Run `make run`

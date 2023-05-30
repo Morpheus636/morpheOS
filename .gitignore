@@ -21,3 +21,5 @@ tags
 # Persistent undo
 [._]*.un~
 
+#Distributables
+dist/
